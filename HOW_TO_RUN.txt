@@ -1,0 +1,39 @@
+How to open the Atunda website (with embedded Unity game)
+=========================================================
+
+Do NOT double-click index.html.
+Browsers block Unity WebGL when opened as a local file (file://).
+
+1. Open PowerShell or Terminal.
+2. Go to this folder:
+
+   cd C:\Users\adora\new_atunda_working_dance_2
+
+3. Start a local server:
+
+   python -m http.server 8000
+
+   (If Python is not installed, from Unity use: File > Build Settings > Build And Run)
+
+4. In your browser open:
+
+   http://localhost:8000
+
+5. Wait until the game finishes loading, then click:
+   - Next dance move
+   - Next character
+
+Those buttons call:
+  unityInstance.SendMessage("WebBridge", "NextDanceMove")
+  unityInstance.SendMessage("WebBridge", "NextCharacter")
+
+Unity setup required
+--------------------
+In your Unity scene:
+1. Create empty GameObject named exactly: WebBridge
+2. Add a script with public methods:
+     public void NextDanceMove() { ... }
+     public void NextCharacter() { ... }
+3. Rebuild WebGL into this same folder (or update the Build/ file names in game.js).
+
+Original Unity page backup: index.unity-original.html
