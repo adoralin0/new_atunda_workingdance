@@ -8,9 +8,12 @@ Repo / website folder:
 Do NOT double-click index.html.
 Browsers block Unity WebGL on file:// URLs.
 
-Steps:
-1. Open PowerShell
-2. Run:
+1. Open PowerShell or Terminal.
+2. Go to this folder:
+
+   cd C:\Users\adora\new_atunda_working_dance
+
+3. Start a local server:
 
    cd C:\Users\adora\new_atunda_workingdance
    python -m http.server 8000
