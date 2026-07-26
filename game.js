@@ -318,4 +318,16 @@
   };
 
   document.body.appendChild(script);
+
+  // Stronger press feedback on touch / mouse for website buttons.
+  document.querySelectorAll(".btn, .exit-fullscreen-btn").forEach((btn) => {
+    const press = () => {
+      if (!btn.disabled) btn.classList.add("is-pressed");
+    };
+    const release = () => btn.classList.remove("is-pressed");
+    btn.addEventListener("pointerdown", press);
+    btn.addEventListener("pointerup", release);
+    btn.addEventListener("pointerleave", release);
+    btn.addEventListener("pointercancel", release);
+  });
 })();
