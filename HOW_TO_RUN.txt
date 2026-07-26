@@ -1,39 +1,39 @@
-How to open the Atunda website (with embedded Unity game)
-=========================================================
+How to open the Atunda website
+==============================
+
+Repo / website folder:
+
+  C:\Users\adora\new_atunda_workingdance
 
 Do NOT double-click index.html.
-Browsers block Unity WebGL when opened as a local file (file://).
+Browsers block Unity WebGL on file:// URLs.
 
-1. Open PowerShell or Terminal.
-2. Go to this folder:
+Steps:
+1. Open PowerShell
+2. Run:
 
-   cd C:\Users\adora\new_atunda_working_dance_2
-
-3. Start a local server:
-
+   cd C:\Users\adora\new_atunda_workingdance
    python -m http.server 8000
 
-   (If Python is not installed, from Unity use: File > Build Settings > Build And Run)
-
-4. In your browser open:
+3. Open in your browser:
 
    http://localhost:8000
 
-5. Wait until the game finishes loading, then click:
-   - Next dance move
-   - Next character
+Keep the PowerShell window open while you use the site.
+Press Ctrl+C in that window to stop the server.
 
-Those buttons call:
-  unityInstance.SendMessage("WebBridge", "NextDanceMove")
-  unityInstance.SendMessage("WebBridge", "NextCharacter")
+Unity WebGL rebuild tip
+-----------------------
+When you rebuild from Unity, build into this same folder
+(new_atunda_workingdance), not new_atunda_working_dance_2.
 
-Unity setup required
---------------------
-In your Unity scene:
-1. Create empty GameObject named exactly: WebBridge
-2. Add a script with public methods:
-     public void NextDanceMove() { ... }
-     public void NextCharacter() { ... }
-3. Rebuild WebGL into this same folder (or update the Build/ file names in game.js).
+Unity names Build files after the output folder. If files come out as
+new_atunda_working_dance_2.*, either:
+- rename them to new_atunda_working_dance.*, or
+- update the four paths in game.js to match.
 
-Original Unity page backup: index.unity-original.html
+game.js currently expects:
+  Build/new_atunda_working_dance.loader.js
+  Build/new_atunda_working_dance.data
+  Build/new_atunda_working_dance.framework.js
+  Build/new_atunda_working_dance.wasm
