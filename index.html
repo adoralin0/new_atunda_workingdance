@@ -33,8 +33,6 @@
       </main>
 
       <aside class="controls" aria-label="Game controls">
-        <p id="status" class="status" data-state="loading">Loading game…</p>
-
         <div class="button-row">
           <button type="button" id="btn-next-move" class="btn" disabled>
             Next dance move
@@ -46,13 +44,6 @@
             Fullscreen
           </button>
         </div>
-
-        <p class="hint">
-          These buttons call Unity with
-          <code>SendMessage("WebBridge", …)</code>.
-          Add a GameObject named <strong>WebBridge</strong> in Unity with public methods
-          <code>NextDanceMove</code> and <code>NextCharacter</code>, then rebuild WebGL.
-        </p>
       </aside>
     </div>
 

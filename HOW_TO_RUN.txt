@@ -1,41 +1,42 @@
 How to open the Atunda website
 ==============================
 
-Repo / website folder:
+GitHub Pages (live link)
+------------------------
+After Pages is enabled, the site will be at:
 
-  C:\Users\adora\new_atunda_workingdance
+  https://adoralin0.github.io/new_atunda_workingdance/
 
-Do NOT double-click index.html.
-Browsers block Unity WebGL on file:// URLs.
+Enable Pages (one-time) in GitHub:
+1. Open https://github.com/adoralin0/new_atunda_workingdance
+2. Click Settings
+3. Click Pages (left sidebar)
+4. Under Build and deployment → Source, choose "Deploy from a branch"
+5. Branch: main
+6. Folder: / (root)
+7. Click Save
+8. Wait 1–2 minutes, then open the link above
 
-1. Open PowerShell or Terminal.
-2. Go to this folder:
+Local (optional)
+----------------
+Double-click:
 
-   cd C:\Users\adora\new_atunda_working_dance
+  Open Website.bat
 
-3. Start a local server:
+Or manually:
 
-   cd C:\Users\adora\new_atunda_workingdance
-   python -m http.server 8000
+  cd C:\Users\adora\new_atunda_workingdance
+  python -m http.server 8000
 
-3. Open in your browser:
+Then open http://localhost:8000
 
-   http://localhost:8000
-
-Keep the PowerShell window open while you use the site.
-Press Ctrl+C in that window to stop the server.
+Do NOT double-click index.html (file:// is blocked for Unity WebGL).
 
 Unity WebGL rebuild tip
 -----------------------
-When you rebuild from Unity, build into this same folder
-(new_atunda_workingdance), not new_atunda_working_dance_2.
+Build into this folder (new_atunda_workingdance).
 
-Unity names Build files after the output folder. If files come out as
-new_atunda_working_dance_2.*, either:
-- rename them to new_atunda_working_dance.*, or
-- update the four paths in game.js to match.
-
-game.js currently expects:
+game.js expects:
   Build/new_atunda_working_dance.loader.js
   Build/new_atunda_working_dance.data
   Build/new_atunda_working_dance.framework.js

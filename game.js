@@ -1,16 +1,10 @@
 (() => {
   const canvas = document.querySelector("#unity-canvas");
-  const statusEl = document.querySelector("#status");
   const btnNextMove = document.querySelector("#btn-next-move");
   const btnNextCharacter = document.querySelector("#btn-next-character");
   const btnFullscreen = document.querySelector("#btn-fullscreen");
 
   let unityInstance = null;
-
-  function setStatus(text, state) {
-    statusEl.textContent = text;
-    statusEl.dataset.state = state;
-  }
 
   function setControlsEnabled(enabled) {
     btnNextMove.disabled = !enabled;
@@ -20,7 +14,6 @@
 
   function callUnity(methodName, value) {
     if (!unityInstance) {
-      setStatus("Game is not ready yet.", "error");
       return;
     }
 
@@ -33,10 +26,8 @@
       } else {
         unityInstance.SendMessage(gameObject, methodName, value);
       }
-      setStatus(`Called ${gameObject}.${methodName}()`, "ready");
     } catch (err) {
       console.error(err);
-      setStatus(`SendMessage failed: ${err.message || err}`, "error");
     }
   }
 
@@ -97,7 +88,6 @@
   }
 
   document.querySelector("#unity-loading-bar").style.display = "flex";
-  setStatus("Loading game…", "loading");
 
   const script = document.createElement("script");
   script.src = loaderUrl;
@@ -107,23 +97,18 @@
     })
       .then((instance) => {
         unityInstance = instance;
-        window.unityInstance = instance; // handy for console testing
+        window.unityInstance = instance;
         document.querySelector("#unity-loading-bar").style.display = "none";
         setControlsEnabled(true);
-        setStatus("Game ready — use the buttons below.", "ready");
       })
       .catch((message) => {
         console.error(message);
         setControlsEnabled(false);
-        setStatus(String(message), "error");
         alert(message);
       });
   };
   script.onerror = () => {
-    setStatus(
-      "Could not load Unity loader. Serve this folder over http://localhost (not file://).",
-      "error"
-    );
+    alert("Could not load Unity loader. Serve this folder over http://localhost (not file://).");
   };
 
   document.body.appendChild(script);
