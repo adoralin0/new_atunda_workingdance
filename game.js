@@ -64,12 +64,12 @@
   });
 
   const buildUrl = "Build";
-  const loaderUrl = `${buildUrl}/new_atunda_working_dance.loader.js`;
+  const loaderUrl = `${buildUrl}/new_atunda_working_dance_2.loader.js`;
   const config = {
     arguments: [],
-    dataUrl: `${buildUrl}/new_atunda_working_dance.data`,
-    frameworkUrl: `${buildUrl}/new_atunda_working_dance.framework.js`,
-    codeUrl: `${buildUrl}/new_atunda_working_dance.wasm`,
+    dataUrl: `${buildUrl}/new_atunda_working_dance_2.data`,
+    frameworkUrl: `${buildUrl}/new_atunda_working_dance_2.framework.js`,
+    codeUrl: `${buildUrl}/new_atunda_working_dance_2.wasm`,
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "UPose",
