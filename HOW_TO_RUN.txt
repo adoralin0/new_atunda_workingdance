@@ -7,7 +7,7 @@ Browsers block Unity WebGL when opened as a local file (file://).
 1. Open PowerShell or Terminal.
 2. Go to this folder:
 
-   cd C:\Users\adora\new_atunda_working_dance_2
+   cd C:\Users\adora\new_atunda_working_dance
 
 3. Start a local server:
 
