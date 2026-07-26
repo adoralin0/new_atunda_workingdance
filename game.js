@@ -42,6 +42,69 @@
     }
   }
 
+  // CharacterSelector lives on this GameObject (same as in-game arrows).
+  const characterSelectorObject = "Characters (1)";
+  let cachedDanceCount = null;
+
+  async function getDanceCount() {
+    if (cachedDanceCount != null) {
+      return cachedDanceCount;
+    }
+
+    try {
+      const response = await fetch("StreamingAssets/atunda/dances.manifest.json", {
+        cache: "no-cache",
+      });
+      const dances = await response.json();
+      cachedDanceCount = Array.isArray(dances) ? dances.length : 0;
+    } catch (err) {
+      console.error("Failed to load dance list:", err);
+      cachedDanceCount = 0;
+    }
+
+    return cachedDanceCount;
+  }
+
+  function nextCharacter() {
+    callUnity("NextCharacter");
+  }
+
+  function previousCharacter() {
+    if (!unityInstance) return;
+    try {
+      // Works with current builds: CharacterSelector.PreviousCharacter already exists.
+      unityInstance.SendMessage(characterSelectorObject, "PreviousCharacter");
+    } catch (err) {
+      console.error(err);
+      callUnity("PreviousCharacter");
+    }
+  }
+
+  function nextDanceMove() {
+    callUnity("NextDanceMove");
+  }
+
+  // Current WebGL build has NextDanceMove but not PreviousDanceMove.
+  // Calling next (count - 1) times wraps to the previous dance.
+  async function previousDanceMove() {
+    if (!unityInstance) return;
+
+    const count = await getDanceCount();
+    if (count <= 0) {
+      callUnity("PreviousDanceMove");
+      return;
+    }
+
+    if (count === 1) {
+      callUnity("NextDanceMove");
+      return;
+    }
+
+    for (let i = 0; i < count - 1; i++) {
+      callUnity("NextDanceMove");
+    }
+  }
+
   function getFullscreenElement() {
     return (
       document.fullscreenElement ||
@@ -172,10 +235,12 @@
     updateBannerVisibility();
   }
 
-  btnPrevMove.addEventListener("click", () => callUnity("PreviousDanceMove"));
-  btnNextMove.addEventListener("click", () => callUnity("NextDanceMove"));
-  btnPrevCharacter.addEventListener("click", () => callUnity("PreviousCharacter"));
-  btnNextCharacter.addEventListener("click", () => callUnity("NextCharacter"));
+  btnPrevMove.addEventListener("click", () => {
+    previousDanceMove();
+  });
+  btnNextMove.addEventListener("click", () => nextDanceMove());
+  btnPrevCharacter.addEventListener("click", () => previousCharacter());
+  btnNextCharacter.addEventListener("click", () => nextCharacter());
   btnFullscreen.addEventListener("click", () => {
     toggleFullscreen();
   });
@@ -185,10 +250,10 @@
 
   // Public JS API for embedding / console use
   window.atundaApi = {
-    nextDanceMove: () => callUnity("NextDanceMove"),
-    previousDanceMove: () => callUnity("PreviousDanceMove"),
-    nextCharacter: () => callUnity("NextCharacter"),
-    previousCharacter: () => callUnity("PreviousCharacter"),
+    nextDanceMove,
+    previousDanceMove,
+    nextCharacter,
+    previousCharacter,
     toggleFullscreen,
   };
 
