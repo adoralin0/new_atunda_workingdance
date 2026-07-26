@@ -6,6 +6,7 @@
   const btnPrevCharacter = document.querySelector("#btn-prev-character");
   const btnNextCharacter = document.querySelector("#btn-next-character");
   const btnFullscreen = document.querySelector("#btn-fullscreen");
+  const btnExitFullscreen = document.querySelector("#btn-exit-fullscreen");
 
   const controlButtons = [
     btnPrevMove,
@@ -119,9 +120,13 @@
   }
 
   function updateFullscreenButton() {
-    if (!btnFullscreen) return;
     const on = !!getFullscreenElement() || isImmersive();
-    btnFullscreen.textContent = on ? "Exit fullscreen" : "Fullscreen";
+    if (btnFullscreen) {
+      btnFullscreen.textContent = on ? "Exit fullscreen" : "Fullscreen";
+    }
+    if (btnExitFullscreen) {
+      btnExitFullscreen.hidden = !on;
+    }
   }
 
   async function requestDomFullscreen(el) {
@@ -244,6 +249,12 @@
   btnFullscreen.addEventListener("click", () => {
     toggleFullscreen();
   });
+  if (btnExitFullscreen) {
+    btnExitFullscreen.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleFullscreen();
+    });
+  }
 
   document.addEventListener("fullscreenchange", updateFullscreenButton);
   document.addEventListener("webkitfullscreenchange", updateFullscreenButton);
