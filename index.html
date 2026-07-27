@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atunda Dance Project</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="top">
+        <p class="brand">Atunda Dance Project</p>
+      </header>
+
+      <main class="stage">
+        <div id="unity-container" class="unity-desktop">
+          <canvas id="unity-canvas" width="960" height="600" tabindex="-1"></canvas>
+          <div id="unity-loading-bar">
+            <div id="unity-logo"></div>
+            <div id="unity-progress-bar-empty">
+              <div id="unity-progress-bar-full"></div>
+            </div>
+          </div>
+          <div id="unity-warning"></div>
+          <button type="button" id="btn-exit-fullscreen" class="exit-fullscreen-btn" hidden>
+            Exit fullscreen
+          </button>
+        </div>
+      </main>
+
+      <aside class="controls" aria-label="Game controls">
+        <div class="button-row">
+          <button type="button" id="btn-prev-move" class="btn" disabled>
+            Previous dance move
+          </button>
+          <button type="button" id="btn-next-move" class="btn" disabled>
+            Next dance move
+          </button>
+          <button type="button" id="btn-prev-character" class="btn btn-secondary" disabled>
+            Previous character
+          </button>
+          <button type="button" id="btn-next-character" class="btn btn-secondary" disabled>
+            Next character
+          </button>
+          <button type="button" id="btn-fullscreen" class="btn btn-ghost" disabled>
+            Fullscreen
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
